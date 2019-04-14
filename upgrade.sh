@@ -27,5 +27,5 @@ sudo systemctl start mastodon-web.service mastodon-sidekiq.service mastodon-stre
 bundle exec rails db:migrate
 popd > /dev/null
 
-sudo systemctl status mastodon-web.service mastodon-sidekiq.service mastodon-streaming.service --no-pager
+sudo systemctl status mastodon-web.service mastodon-sidekiq.service mastodon-streaming.service -l --no-pager
 
