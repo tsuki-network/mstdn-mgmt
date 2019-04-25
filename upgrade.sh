@@ -16,6 +16,9 @@ if [[ $? -ne 0 ]]; then
   rbenv install $(cat .ruby-version)
   rbenv global $(cat .ruby-version)
 fi
+nvm install $(cat .nvmrc)
+nvm use $(cat .nvmrc)
+npm install -g npm
 
 gem install bundler
 bundle install -j$(getconf _NPROCESSORS_ONLN) --deployment --without development test
