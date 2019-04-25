@@ -1,0 +1,18 @@
+[Unit]
+Description=mastodon-streaming
+After=network.target
+
+[Service]
+Type=simple
+User=mastodon
+WorkingDirectory=/home/mastodon/live
+Environment="NODE_ENV=production"
+Environment="NODE_VERSION=8"
+Environment="PORT=4000"
+Environment="STREAMING_CLUSTER_NUM=1"
+ExecStart=/home/mastodon/.nvm/nvm-exec node ./streaming
+TimeoutSec=15
+Restart=always
+
+[Install]
+WantedBy=multi-user.target
