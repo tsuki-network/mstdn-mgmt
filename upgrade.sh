@@ -1,7 +1,6 @@
 #!/bin/bash
 
 SERVICE_BRANCH=$(cat ~/.service-branch)
-SERVICE_DOMAIN=$(cat ~/.service-domain)
 
 export RAILS_ENV=production
 pushd /home/mastodon/live > /dev/null
@@ -38,9 +37,7 @@ popd > /dev/null
 
 sudo systemctl status --full --no-pager mastodon-web.service mastodon-sidekiq.service mastodon-streaming.service
 
-while ! curl -sSLI https://$SERVICE_DOMAIN/.well-known/host-meta -o /dev/null -w '%{http_code}' | grep '200' | wc -l; do
-  sleep 1s
-done
+/home/mastodon/wait-for-boot.sh
 
 /home/mastodon/toot 【メンテナンス終了】Mastodon $MSTDN_UPGRADE_VERSION へのアップデートが完了しました。
 
