@@ -10,7 +10,7 @@ git status | grep "up to date"
 if [[ $? -eq 0 ]]; then exit 0; fi
 git reset --hard origin/$SERVICE_BRANCH
 
-MSTDN_UPGRADE_VERSION=$(git describe --tags --exact-match || echo "$(git describe --tags $(git rev-list --tags --max-co unt=1)) ($(git rev-parse HEAD))")
+MSTDN_UPGRADE_VERSION=$(git describe --tags --exact-match || echo "$(git describe --tags $(git rev-list --tags --max-count=1)) ($(git rev-parse HEAD))")
 /home/mastodon/toot 【メンテナンス告知】当インスタンスは、今から約30分間 Mastodon $MSTDN_UPGRADE_VERSION へのアップデートを行います。その間、アクセスが円滑でないことがありますので、ご了承お願いいたします。
 
 rbenv versions | grep $(cat .ruby-version)
@@ -21,8 +21,8 @@ if [[ $? -ne 0 ]]; then
   rbenv install $(cat .ruby-version)
   rbenv global $(cat .ruby-version)
 fi
-nvm install $(cat .nvmrc)
-nvm use $(cat .nvmrc)
+. ~/.nvm/nvm.sh install $(cat .nvmrc)
+. ~/.nvm/nvm.sh use $(cat .nvmrc)
 npm install -g npm
 
 gem install bundler
