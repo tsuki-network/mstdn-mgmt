@@ -1,12 +1,15 @@
 #!/bin/bash
 
+SERVICE_BRANCH=$(cat ~/.service-branch)
+SERVICE_DOMAIN=$(cat ~/.service-domain)
+
 export RAILS_ENV=production
 pushd /home/mastodon/live > /dev/null
 git fetch --all
-git checkout tsuki.network > /dev/null 2>&1
+git checkout $SERVICE_BRANCH > /dev/null 2>&1
 git status | grep "up to date"
 if [[ $? -eq 0 ]]; then exit 0; fi
-git reset --hard origin/tsuki.network
+git reset --hard origin/$SERVICE_BRANCH
 
 MSTDN_UPGRADE_VERSION=$(git describe --tags --exact-match || echo "$(git describe --tags $(git rev-list --tags --max-co unt=1)) ($(git rev-parse HEAD))")
 /home/mastodon/toot 【メンテナンス告知】当インスタンスは、今から約30分間 Mastodon $MSTDN_UPGRADE_VERSION へのアップデートを行います。その間、アクセスが円滑でないことがありますので、ご了承お願いいたします。
@@ -35,7 +38,7 @@ popd > /dev/null
 
 sudo systemctl status --full --no-pager mastodon-web.service mastodon-sidekiq.service mastodon-streaming.service
 
-while ! curl -sSLI https://tsuki.network/.well-known/host-meta -o /dev/null -w '%{http_code}' | grep '200' | wc -l; do
+while ! curl -sSLI https://$SERVICE_DOMAIN/.well-known/host-meta -o /dev/null -w '%{http_code}' | grep '200' | wc -l; do
   sleep 1s
 done
 

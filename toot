@@ -10,11 +10,13 @@ urlencode() {
   echo "$e"
 }
 
-toot_msg=$(urlencode "$@")
+SERVICE_DOMAIN=$(cat ~/.service-domain)
+
+TOOT_MSG=$(urlencode "$@")
 
 curl -X POST \
-     -d 'status='${toot_msg} \
+     -d 'status='$TOOT_MSG \
      -d 'visibility=public' \
      -H 'Authorization: Bearer '$(cat ~/.access-token) \
-     -sS https://tsuki.network/api/v1/statuses
+     -sS https://$SERVICE_DOMAIN/api/v1/statuses
 
