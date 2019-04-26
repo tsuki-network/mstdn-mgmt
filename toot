@@ -1,0 +1,20 @@
+#!/bin/bash
+
+urlencode() {
+  local LANG=C i c e='' v="$@"
+  for ((i=0;i<${#v};i++)); do
+    c=${v:$i:1}
+    [[ "$c" =~ [a-zA-Z0-9\.\~\_\-] ]] || printf -v c '%%%02X' "'$c"
+    e+="$c"
+  done
+  echo "$e"
+}
+
+toot_msg=$(urlencode "$@")
+
+curl -X POST \
+     -d 'status='${toot_msg} \
+     -d 'visibility=public' \
+     -H 'Authorization: Bearer '$(cat ~/.access-token) \
+     -sS https://tsuki.network/api/v1/statuses
+
