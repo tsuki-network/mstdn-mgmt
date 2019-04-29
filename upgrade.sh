@@ -23,7 +23,7 @@ fi
 npm install -g npm
 
 GIT_CURRENT_COMMIT=$(git rev-parse HEAD)
-MSTDN_UPGRADE_VERSION=$(git describe --tags --exact-match || echo "$(git describe --tags $(git rev-list --tags --max-count=1)) ($GIT_CURRENT_COMMIT:0:8})")
+MSTDN_UPGRADE_VERSION=$(git describe --tags --exact-match || echo "$(git describe --tags $(git rev-list --tags --max-count=1)) (${GIT_CURRENT_COMMIT:0:8})")
 /home/mastodon/toot 【メンテナンス告知】当インスタンスは、今から約30分間 Mastodon $MSTDN_UPGRADE_VERSION へのアップデートを行います。その間、アクセスが円滑でないことがありますので、ご了承お願いいたします。
 
 gem install bundler
