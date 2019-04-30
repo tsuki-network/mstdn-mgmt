@@ -4,7 +4,7 @@ SERVICE_BRANCH=$(cat ~/.service-branch)
 
 export RAILS_ENV=production
 pushd /home/mastodon/live > /dev/null
-git fetch --all
+git fetch --all --tags --prune --prune-tags
 git checkout $SERVICE_BRANCH > /dev/null 2>&1
 git status | grep "up to date"
 if [[ $? -eq 0 ]]; then exit 0; fi
