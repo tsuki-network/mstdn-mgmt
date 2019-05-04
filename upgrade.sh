@@ -18,8 +18,9 @@ if [[ $? -ne 0 ]]; then
   rbenv install $(cat .ruby-version)
   rbenv global $(cat .ruby-version)
 fi
-. ~/.nvm/nvm.sh install $(cat .nvmrc)
-. ~/.nvm/nvm.sh use $(cat .nvmrc)
+. ~/.nvm/nvm.sh
+nvm install $(cat .nvmrc)
+nvm use $(cat .nvmrc)
 npm install -g npm
 
 GIT_CURRENT_COMMIT=$(git rev-parse HEAD)
