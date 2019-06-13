@@ -35,6 +35,8 @@ sudo systemctl stop mastodon-streaming.service mastodon-sidekiq.service mastodon
 bundle exec rails assets:precompile
 sudo systemctl start mastodon-web.service mastodon-sidekiq.service mastodon-streaming.service
 bundle exec rails db:migrate
+/home/mastodon/tootctl cache clear
+sudo systemctl restart mastodon-web.service mastodon-sidekiq.service mastodon-streaming.service
 popd > /dev/null
 
 sudo systemctl status --full --no-pager mastodon-web.service mastodon-sidekiq.service mastodon-streaming.service
