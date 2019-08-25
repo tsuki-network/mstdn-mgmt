@@ -16,7 +16,7 @@ nvm use $(cat .nvmrc)
 npm install -g npm
 
 gem update --system
-gem install bundler
+gem install bundler --no-document
 bundle install -j$(getconf _NPROCESSORS_ONLN) --deployment --without development test
 yarn install --pure-lockfile
 SKIP_POST_DEPLOYMENT_MIGRATIONS=true bundle exec rails db:migrate
