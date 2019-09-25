@@ -10,6 +10,8 @@ git status | grep "up to date"
 if [[ $? -eq 0 ]]; then exit 0; fi
 git reset --hard origin/$SERVICE_BRANCH
 
+export PATH="$HOME/.rbenv/bin:$PATH"
+eval "$(rbenv init -)"
 rbenv versions | grep $(cat .ruby-version)
 if [[ $? -ne 0 ]]; then
   pushd /home/mastodon/.rbenv/plugins/ruby-build
