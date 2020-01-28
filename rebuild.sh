@@ -17,7 +17,6 @@ nvm install $(cat .nvmrc)
 nvm use $(cat .nvmrc)
 npm install -g npm
 
-gem update --system
 gem install bundler --no-document
 bundle install -j$(getconf _NPROCESSORS_ONLN) --full-index
 yarn install --pure-lockfile
@@ -31,4 +30,3 @@ popd > /dev/null
 sudo systemctl status --full --no-pager mastodon-web.service mastodon-sidekiq.service mastodon-streaming.service
 
 /home/mastodon/wait-for-boot.sh
-
