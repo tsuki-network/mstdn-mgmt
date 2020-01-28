@@ -21,7 +21,7 @@ gem update --system
 gem install bundler --no-document
 bundle config set clean 'true'
 bundle config set deployment 'true'
-bundle config set without 'development production pam_authentication'
+bundle config set without 'development test'
 bundle config set frozen 'true'
 bundle install -j$(getconf _NPROCESSORS_ONLN) --retry 3 && bundle clean
 yarn install --pure-lockfile
