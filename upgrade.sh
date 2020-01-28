@@ -31,7 +31,7 @@ MSTDN_UPGRADE_VERSION=$(git describe --tags --exact-match || echo "$(git describ
 
 gem update --system
 gem install bundler --no-document
-bundle install -j$(getconf _NPROCESSORS_ONLN) --deployment --without development test
+bundle install -j$(getconf _NPROCESSORS_ONLN)
 yarn install --pure-lockfile
 SKIP_POST_DEPLOYMENT_MIGRATIONS=true bundle exec rails db:migrate
 sudo systemctl stop mastodon-streaming.service mastodon-sidekiq.service mastodon-web.service
