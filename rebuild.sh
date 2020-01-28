@@ -4,13 +4,13 @@ export RAILS_ENV=production
 pushd /home/mastodon/live > /dev/null
 export PATH="$HOME/.rbenv/bin:$PATH"
 eval "$(rbenv init -)"
-rbenv versions | grep $(cat .ruby-version)
+rbenv versions | grep $(cat ~/.ruby-version)
 if [[ $? -ne 0 ]]; then
   pushd /home/mastodon/.rbenv/plugins/ruby-build
   git pull
   popd
-  RUBY_CONFIGURE_OPTS=--with-jemalloc rbenv install $(cat .ruby-version)
-  rbenv global $(cat .ruby-version)
+  RUBY_CONFIGURE_OPTS=--with-jemalloc rbenv install $(cat ~/.ruby-version)
+  rbenv global $(cat ~/.ruby-version)
 fi
 . ~/.nvm/nvm.sh
 nvm install $(cat .nvmrc)
