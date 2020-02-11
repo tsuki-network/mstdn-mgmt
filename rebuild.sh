@@ -24,7 +24,7 @@ bundle config set deployment 'true'
 bundle config set without 'development test'
 bundle config set frozen 'true'
 bundle install -j$(getconf _NPROCESSORS_ONLN) --retry 3 && bundle clean
-yarn install --pure-lockfile
+npx yarn install --pure-lockfile
 SKIP_POST_DEPLOYMENT_MIGRATIONS=true bundle exec rails db:migrate
 sudo systemctl stop mastodon-streaming.service mastodon-sidekiq.service mastodon-web.service
 bundle exec rails assets:precompile
